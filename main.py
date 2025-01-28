@@ -10,7 +10,7 @@ from langchain.embeddings import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
 
 from dotenv import load_dotenv
-load_dotenv()  # take environment variables from .env (especially openai api key)
+load_dotenv()  # take environment variables from .env (especially openai api key) ,  once use the open api key and check if it is working
 
 st.title("RockyBot: News Research Tool 📈")
 st.sidebar.title("News Article URLs")
@@ -27,11 +27,11 @@ main_placeholder = st.empty()
 llm = OpenAI(temperature=0.9, max_tokens=500)
 
 if process_url_clicked:
-    # load data
+    
     loader = UnstructuredURLLoader(urls=urls)
     main_placeholder.text("Data Loading...Started...✅✅✅")
     data = loader.load()
-    # split data
+    
     text_splitter = RecursiveCharacterTextSplitter(
         separators=['\n\n', '\n', '.', ','],
         chunk_size=1000
@@ -59,7 +59,7 @@ if query:
             st.header("Answer")
             st.write(result["answer"])
 
-            #
+        
             sources = result.get("sources", "")
             if sources:
                 st.subheader("Sources:")
